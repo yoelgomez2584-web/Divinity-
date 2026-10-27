@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="oscuro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#09090b">
+<title>Divinity</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#09090b;--fg:#f5f5f7;--mut:#9b9ba3;--card:rgba(255,255,255,.07);--line:rgba(255,255,255,.09);--nav:rgba(28,28,32,.78);--g1:rgba(150,150,175,.28);--g2:rgba(110,140,125,.2);--ac:#f5f5f7;--on:#09090b;color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);background:var(--bg)}
+:root[data-theme=claro]{--bg:#f2f2f5;--fg:#1c1c1e;--mut:#6c6c72;--card:rgba(255,255,255,.75);--line:rgba(0,0,0,.07);--nav:rgba(255,255,255,.82);--g1:rgba(160,170,210,.4);--g2:rgba(190,205,170,.4);color-scheme:light}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box;margin:0;-webkit-tap-highlight-color:transparent}
+body{background:var(--bg);color:var(--fg);font:15px/1.4 -apple-system,'SF Pro Display','Inter',Roboto,system-ui,sans-serif;min-height:100vh;padding:0 16px 120px;max-width:600px;margin:auto}
+body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(70% 45% at 10% 0%,var(--g1),transparent),radial-gradient(60% 40% at 100% 35%,var(--g2),transparent)}
+main{position:relative;z-index:1}
+h1{font-size:30px;font-weight:700;letter-spacing:-.8px;line-height:1.1}
+h2{font-size:22px;font-weight:700;letter-spacing:-.5px;margin:6px 0 12px}
+.mu,small{color:var(--mut)}small{display:block;font-size:13px}
+.k{font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--mut);margin-bottom:8px}
+.top{display:flex;justify-content:space-between;align-items:center;padding:22px 2px 12px}
+.av{width:42px;height:42px;border-radius:50%;border:0;background:var(--ac);color:var(--on);font:inherit;font-weight:700;font-size:17px}
+.c{background:var(--card);backdrop-filter:blur(24px) saturate(1.4);-webkit-backdrop-filter:blur(24px) saturate(1.4);border:1px solid var(--line);border-radius:24px;padding:16px;margin:12px 0}
+.verse{font:italic 400 21px/1.4 'New York','Iowan Old Style',Georgia,serif;margin:6px 0 10px}
+.li{display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid var(--line);min-height:56px}.li:last-child{border:0}
+.li>div:nth-child(2){flex:1;min-width:0}.li b{font-weight:600;display:block}
+.ic{width:38px;height:38px;border-radius:11px;display:grid;place-items:center;font-size:19px;background:var(--line);flex:none}
+.ck{width:28px;height:28px;border-radius:50%;border:2px solid var(--mut);flex:none;display:grid;place-items:center;color:var(--on);font-size:15px;font-weight:700;transition:.25s}
+.d .ck{background:var(--ac);border-color:var(--ac);transform:scale(1.05)}.d b{opacity:.5;text-decoration:line-through}
+.sw{width:51px;height:31px;border-radius:16px;background:rgba(128,128,128,.35);border:0;position:relative;flex:none;transition:.25s;padding:0}
+.sw::after{content:"";position:absolute;top:2px;left:2px;width:27px;height:27px;border-radius:50%;background:#fff;box-shadow:0 2px 5px #0004;transition:.25s}
+.sw.on{background:var(--ac)}.sw.on::after{transform:translateX(20px)}
+.sg{display:flex;background:rgba(128,128,128,.18);border-radius:12px;padding:3px;gap:2px;overflow-x:auto;scrollbar-width:none;margin:8px 0}
+.sg button{flex:1;border:0;background:none;color:var(--fg);font:inherit;font-size:13px;font-weight:500;padding:8px 12px;border-radius:9px;white-space:nowrap;cursor:pointer}
+.sg .on{background:var(--ac);color:var(--on);font-weight:600}
+.bt{background:var(--ac);color:var(--on);border:0;border-radius:14px;padding:12px 18px;font:inherit;font-weight:600;cursor:pointer}
+.rb{width:46px;height:46px;border-radius:50%;border:0;background:var(--line);color:var(--fg);font-size:24px;cursor:pointer}
+input[type=text],input:not([type]){background:rgba(128,128,128,.16);color:var(--fg);border:0;border-radius:12px;padding:12px;font:inherit;width:100%}
+input[type=range]{width:100%;accent-color:var(--ac)}
+.row{display:flex;gap:10px;align-items:center}.row>input{flex:1}
+.wkr{display:flex;gap:6px;margin:4px 0}
+.dy{flex:1;border:0;background:none;color:var(--fg);font:inherit;padding:8px 0;border-radius:16px;display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer}
+.dy span{font-size:11px;color:var(--mut)}.dy b{font-size:17px;font-weight:600}
+.dy i{width:6px;height:6px;border-radius:50%}.dy i.ok{background:var(--ac)}
+.dy.on{background:var(--card);outline:1.5px solid var(--ac)}
+.aros{display:flex;align-items:center;gap:18px}.aros svg{width:128px;height:128px;flex:none}
+.aros p{display:flex;align-items:center;gap:8px;margin:5px 0;font-size:14px}.aros p i{width:10px;height:10px;border-radius:50%}
+.bar{height:8px;border-radius:4px;background:var(--line);overflow:hidden;margin:8px 0}.bar i{display:block;height:100%;background:var(--ac);border-radius:4px;transition:.4s}
+.big{font-size:40px;font-weight:700;letter-spacing:-1px;line-height:1}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:10px}.g2 .c{margin:0}
+.hm{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}.hm i{aspect-ratio:1;border-radius:8px;background:var(--ac)}
+.lg{display:inline-flex;align-items:center;gap:6px;padding:8px 12px;border-radius:20px;background:var(--line);margin:0 6px 8px 0;font-size:13px}.lg.off{opacity:.35}
+.mood{display:flex;justify-content:space-between;margin-top:6px}.mood button{font-size:28px;width:52px;height:52px;border-radius:16px;border:0;background:none;opacity:.45;cursor:pointer}.mood .on{opacity:1;background:var(--line)}
+.bw{position:relative;height:180px;display:grid;place-items:center;cursor:pointer}
+.orb{width:130px;height:130px;border-radius:50%;background:radial-gradient(circle at 35% 30%,rgba(255,255,255,.7),var(--ac));opacity:.9;transform:scale(.7)}
+.bw span{position:absolute;font-weight:600;color:var(--on);opacity:0}.bw .st{opacity:1}
+.go .orb{animation:br 10s ease-in-out infinite}.go .in{animation:fa 10s infinite}.go .ex{animation:fb 10s infinite}.go .st{opacity:0}
+@keyframes br{0%,100%{transform:scale(.7)}40%{transform:scale(1.2)}}
+@keyframes fa{0%,38%{opacity:1}42%,100%{opacity:0}}@keyframes fb{0%,38%{opacity:0}42%,100%{opacity:1}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+details{padding:12px 0;border-bottom:1px solid var(--line)}details:last-child{border:0}summary{font-weight:600;cursor:pointer}details p{color:var(--mut);margin-top:6px;font-size:14px}
+.sw2{width:36px;height:36px;border-radius:50%;border:2px solid transparent;cursor:pointer}.sw2.on{outline:2px solid var(--fg);outline-offset:2px}
+nav{position:fixed;left:12px;right:12px;bottom:calc(10px + env(safe-area-inset-bottom,0px));max-width:576px;margin:auto;display:flex;background:var(--nav);backdrop-filter:blur(30px) saturate(1.6);-webkit-backdrop-filter:blur(30px) saturate(1.6);border:1px solid var(--line);border-radius:30px;padding:6px;z-index:10;box-shadow:0 8px 30px #0003}
+nav button{flex:1;background:none;border:0;color:var(--mut);font:inherit;font-size:10px;font-weight:500;padding:7px 0 5px;border-radius:24px;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer}
+nav svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+nav .on{color:var(--fg);background:var(--line)}
+.wl{position:fixed;inset:0;z-index:20;background:var(--bg);display:grid;place-items:center;padding:24px}.wl .c{max-width:420px;text-align:center}
+.foot{font-size:12px;color:var(--mut);text-align:center;margin:18px 8px}
+</style>
+</head>
+<body>
+<main id="app"></main>
+<nav>
+<button data-a="tab" data-i="hoy"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5L19 19M5 19l1.5-1.5M17.5 6.5L19 5"/></svg>Hoy</button>
+<button data-a="tab" data-i="hab"><svg viewBox="0 0 24 24"><path d="M4 7l2 2 3-3M4 16l2 2 3-3M13 8h7M13 17h7"/></svg>Hábitos</button>
+<button data-a="tab" data-i="prog"><svg viewBox="0 0 24 24"><path d="M5 20v-8M12 20V5M19 20V9"/></svg>Progreso</button>
+<button data-a="tab" data-i="apr"><svg viewBox="0 0 24 24"><path d="M4 5a2 2 0 012-2h13v16H6a2 2 0 00-2 2zM4 19a2 2 0 012-2h13"/></svg>Aprender</button>
+<button data-a="tab" data-i="aj"><svg viewBox="0 0 24 24"><path d="M4 7h10M18 7h2M4 17h2M10 17h10"/><circle cx="16" cy="7" r="2"/><circle cx="8" cy="17" r="2"/></svg>Ajustes</button>
+</nav>
+<script>
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const CAT={Sueño:'🌙',Movimiento:'💪',Nutrición:'🥩',Sol:'☀️',Mente:'🧘',Evitar:'🚫',Mío:'⭐'};
+const H=`Sueño|s1*|Dormir 7–9 horas|Gran parte de tu testosterona se produce mientras duermes
+Sueño|s2|Hora fija de dormir|Un ritmo estable mejora tu descanso
+Sueño|s3|Cuarto oscuro y fresco|Favorece el sueño profundo
+Sueño|s4*|Sin pantallas 1 h antes|Menos luz azul, mejor descanso
+Sueño|s5|Cafeína solo hasta las 14:00|Evita que te robe el sueño
+Movimiento|m1*|Entrenar fuerza|Sentadilla, peso muerto, press y remo, 3–4 días por semana
+Movimiento|m2|Ejercicios compuestos pesados|Trabajan mucho músculo a la vez
+Movimiento|m3*|Caminar 8.000 pasos|Menos grasa corporal y menos estrés
+Movimiento|m4|Sprints o HIIT corto|1–2 veces por semana, sin pasarte
+Movimiento|m5|Movilidad y estiramientos|Recuperas mejor y entrenas más constante
+Movimiento|m6|Descanso activo|Recuperar también es entrenar
+Nutrición|n1*|Proteína en cada comida|Huevos, carne, pescado, legumbres
+Nutrición|n2*|Grasas saludables|Aceite de oliva, aguacate, huevos, frutos secos
+Nutrición|n3|Alimentos con zinc|Carne, mariscos, semillas de calabaza
+Nutrición|n4|Alimentos con magnesio|Frutos secos, espinacas, legumbres
+Nutrición|n5|Pescado azul o yema|Fuente natural de vitamina D
+Nutrición|n6|Verduras crucíferas|Brócoli, coliflor, col: fibra y micronutrientes
+Nutrición|n7*|Beber 2 litros de agua|Hidratación y energía
+Nutrición|n8|Comer lo suficiente|Las dietas extremas pueden bajar tus niveles
+Nutrición|n9|Evitar ultraprocesados y azúcar|Menos grasa corporal, más energía
+Sol|o1*|Sol 20 minutos|Luz natural y vitamina D
+Sol|o2|Luz de la mañana|Ordena tu reloj biológico
+Mente|p1*|Oración o silencio 10 min|Menos estrés, más dominio propio
+Mente|p2|Respiración lenta 5 min|Calma tu cuerpo y baja el estrés
+Mente|p3|Gratitud: 3 cosas|Mejora tu ánimo
+Mente|p4|Tiempo en la naturaleza|Reduce el estrés
+Mente|p5|Hablar con alguien querido|Conexión y bienestar
+Mente|p6|Leer 10 minutos|Cambia pantallas por calma
+Evitar|e1*|Cero alcohol|Daña el sueño y la producción hormonal
+Evitar|e2|No fumar ni vapear|Cuida tu salud en general
+Evitar|e3|Sin doomscrolling|Menos ansiedad, más tiempo útil`.split('\n').map(l=>{const[c,i,t,d]=l.split('|');return{c,id:i.replace('*',''),t,d,on:i.endsWith('*')}});
+const V=[['Filipenses 4:13','Todo lo puedo en Cristo que me fortalece.'],['Josué 1:9','Esfuérzate y sé valiente; no temas ni desmayes, porque Jehová tu Dios estará contigo.'],['Isaías 40:31','Los que esperan a Jehová tendrán nuevas fuerzas; levantarán alas como las águilas.'],['2 Timoteo 1:7','No nos ha dado Dios espíritu de cobardía, sino de poder, de amor y de dominio propio.'],['1 Corintios 6:19','¿O ignoráis que vuestro cuerpo es templo del Espíritu Santo?'],['Salmo 28:7','Jehová es mi fortaleza y mi escudo; en él confió mi corazón, y fui ayudado.'],['Gálatas 6:9','No nos cansemos, pues, de hacer bien; porque a su tiempo segaremos, si no desmayamos.'],['Salmo 18:32','Dios es el que me ciñe de poder, y quien hace perfecto mi camino.'],['Eclesiastés 9:10','Todo lo que te viniere a la mano para hacer, hazlo según tus fuerzas.'],['Salmo 127:2','A su amado dará Dios el sueño.'],['Proverbios 16:32','El que domina su espíritu es mejor que el que toma una ciudad.']];
+const T=[['Sueño','Dormir es tu mejor suplemento','Dormir poco varios días puede bajar tus niveles de forma notable. Apunta a 7–9 horas.'],
+['Sueño','Rutina fija','Misma hora de dormir y despertar, cuarto oscuro y fresco, cafeína solo hasta el mediodía.'],
+['Fuerza','Ejercicios compuestos','Sentadilla, peso muerto, press y dominadas. Progresa poco a poco.'],
+['Fuerza','No te sobreentrenes','45–60 min por sesión y días de descanso. Entrenar sin recuperar sube el estrés.'],
+['Comida','No le temas a las grasas','Las dietas muy bajas en grasa pueden bajar la testosterona. Incluye huevos, aceite de oliva y pescado azul.'],
+['Comida','Zinc y magnesio de la comida','Carne, mariscos, semillas, legumbres y frutos secos. Prioriza alimentos antes que pastillas.'],
+['Comida','Nada de dietas extremas','Un déficit agresivo puede bajar tus niveles. Pierde grasa de forma moderada.'],
+['Mente','Controla el estrés','El estrés crónico mantiene el cortisol alto. Oración, respiración lenta y caminar ayudan.'],
+['Mente','Dominio propio','La disciplina diaria pesa más que la motivación. Cumple aunque no tengas ganas.'],
+['Evita','Alcohol y tabaco','Dañan el sueño y la salud. Reducirlos es de lo más rentable.'],
+['Evita','Exceso de grasa corporal','Se asocia a menos testosterona. Baja de peso gradualmente.'],
+['Mitos','«Los boosters milagro funcionan»','Suelen carecer de respaldo. Antes de suplementar, revisa tus hábitos y consulta a tu médico.'],
+['Mitos','«Los esteroides son un atajo»','Apagan tu producción natural y dañan tu salud. No valen la pena.'],
+['Mitos','«La ducha fría la sube»','La evidencia es débil. Puede ayudarte a despertar, pero no es un truco hormonal.']];
+const base=()=>({name:'',seen:0,theme:'auto',accent:'perla',on:H.filter(h=>h.on).map(h=>h.id),custom:[],log:{},w:{verso:1,aros:1,agua:1,registro:1,respira:1,consejo:1}});
+const KEY='divinity.v2';let S=base();
+try{S=Object.assign(base(),JSON.parse(localStorage.getItem(KEY))||{})}catch(e){}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
+const dk=d=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+const back=n=>{const d=new Date();d.setDate(d.getDate()-n);return d};
+const ent=k=>S.log[k]||(S.log[k]={done:[],agua:0,sueno:7.5,animo:0});
+const habits=()=>[...H.filter(h=>S.on.includes(h.id)),...S.custom];
+const pct=k=>{const l=S.log[k],hs=habits();if(!l||!hs.length)return 0;return Math.round(hs.filter(h=>l.done.includes(h.id)).length/hs.length*100)};
+const streak=()=>{let n=0;for(let i=0;i<400;i++){if(pct(dk(back(i)))>=70)n++;else if(i>0)break}return n};
+const now=new Date(),doy=Math.floor((now-new Date(now.getFullYear(),0,0))/864e5);
+let tab='hoy',off=0,vi=0,br=0,hc='Todas',ac='Todos',armed=false;
+const row=(ic,t,d,r,x='')=>`<div class="li ${x}"><div class="ic">${ic}</div><div><b>${t}</b>${d?`<small>${d}</small>`:''}</div>${r}</div>`;
+const R=(r,v,c)=>`<circle cx="64" cy="64" r="${r}" fill="none" stroke="${c}" stroke-opacity=".2" stroke-width="10"/>${v>0?`<circle cx="64" cy="64" r="${r}" fill="none" stroke="${c}" stroke-width="10" stroke-linecap="round" pathLength="100" stroke-dasharray="${Math.min(100,v)} 100" transform="rotate(-90 64 64)"/>`:''}`;
+
+function hoy(){
+const k=dk(back(off)),l=ent(k),p=pct(k),W=S.w,hs=habits(),v=V[(doy+vi)%V.length],tp=T[doy%T.length],hr=now.getHours();
+const g=hr>=6&&hr<13?'Buenos días':hr>=13&&hr<20?'Buenas tardes':'Buenas noches';
+let o=`<div class="top"><div><p class="mu">${back(off).toLocaleDateString('es',{weekday:'long',day:'numeric',month:'long'})}</p><h1>${g}${S.name?', '+esc(S.name):''}</h1></div><button class="av" data-a="tab" data-i="aj" aria-label="Ajustes">${esc((S.name||'D')[0].toUpperCase())}</button></div>`;
+o+=`<div class="wkr">${[6,5,4,3,2,1,0].map(i=>{const d=back(i);return`<button class="dy ${i===off?'on':''}" data-a="day" data-i="${i}"><span>${'DLMXJVS'[d.getDay()]}</span><b>${d.getDate()}</b><i class="${pct(dk(d))>=70?'ok':''}"></i></button>`}).join('')}</div>`;
+if(W.verso)o+=`<div class="c"><p class="k">✝ Versículo del día</p><p class="verse">“${v[1]}”</p><div class="row" style="justify-content:space-between"><small>${v[0]}</small><button class="rb" style="width:38px;height:38px;font-size:18px" data-a="vs" aria-label="Otro versículo">↻</button></div></div>`;
+if(W.aros)o+=`<div class="c aros"><svg viewBox="0 0 128 128">${R(54,p,'#86ab85')}${R(41,l.agua/8*100,'#79a8d8')}${R(28,l.sueno/8*100,'#a591d6')}</svg><div><p><i style="background:#86ab85"></i>Hábitos ${p}%</p><p><i style="background:#79a8d8"></i>Agua ${(l.agua*.25).toLocaleString('es')} L</p><p><i style="background:#a591d6"></i>Sueño ${l.sueno} h</p><small>Racha: ${streak()} días</small></div></div>`;
+o+=`<div class="c"><p class="k">Tus hábitos</p>${hs.map(h=>{const d=l.done.includes(h.id);return row(CAT[h.c],esc(h.t),'',`<div class="ck">${d?'✓':''}</div>`,d?'d':'').replace('class="li','role="checkbox" aria-checked="'+d+'" tabindex="0" data-a="hab" data-i="'+h.id+'" class="li')}).join('')||'<p class="mu">Activa hábitos en la pestaña Hábitos.</p>'}</div>`;
+if(W.agua)o+=`<div class="c"><p class="k">Agua · meta 2 L</p><div class="row" style="justify-content:space-between"><button class="rb" data-a="ag" data-i="-1">−</button><span class="big">${(l.agua*.25).toLocaleString('es')} L</span><button class="rb" data-a="ag" data-i="1">+</button></div><div class="bar"><i style="width:${Math.min(100,l.agua/8*100)}%"></i></div></div>`;
+if(W.registro)o+=`<div class="c"><p class="k">Registro</p><b>Sueño: <span id="sv">${l.sueno} h</span></b><input type="range" min="4" max="11" step=".5" value="${l.sueno}" data-f="lsueno" aria-label="Horas de sueño"><p style="margin-top:12px"><b>¿Cómo te sientes?</b></p><div class="mood">${['😴','😕','🙂','😄','🔥'].map((e,i)=>`<button class="${l.animo===i+1?'on':''}" data-a="mood" data-i="${i+1}">${e}</button>`).join('')}</div></div>`;
+if(W.respira)o+=`<div class="c" style="text-align:center"><p class="k">Respira · baja el estrés</p><div class="bw ${br?'go':''}" data-a="br"><div class="orb"></div><span class="in">Inhala</span><span class="ex">Exhala</span><span class="st">Toca para empezar</span></div></div>`;
+if(W.consejo)o+=`<div class="c"><p class="k">Consejo del día · ${tp[0]}</p><b>${tp[1]}</b><small>${tp[2]}</small></div>`;
+return o}
+
+function hab(){const cs=['Todas',...Object.keys(CAT)];
+const L=[...H,...S.custom].filter(h=>hc==='Todas'||h.c===hc);
+return`<div class="top"><div><p class="mu">${habits().length} activos de ${H.length+S.custom.length}</p><h1>Hábitos</h1></div></div><p class="mu">Todo lo que ayuda a subir tu testosterona de forma natural. Activa los que quieras.</p><div class="sg">${cs.map(x=>`<button class="${x===hc?'on':''}" data-a="hc" data-i="${x}">${x}</button>`).join('')}</div><div class="c">${L.map(h=>row(CAT[h.c],esc(h.t),esc(h.d||''),`${h.id[0]==='x'?`<button class="rb" style="width:34px;height:34px;font-size:16px" data-a="del" data-i="${h.id}" aria-label="Eliminar">✕</button>`:''}<button class="sw ${S.on.includes(h.id)||h.id[0]==='x'?'on':''}" data-a="tog" data-i="${h.id}" aria-label="Activar"></button>`)).join('')||'<p class="mu">Nada aquí todavía.</p>'}</div><div class="c"><p class="k">Crear hábito propio</p><div class="row"><input id="nh" maxlength="40" placeholder="Ej: ducha fría, estirar…"><button class="bt" data-a="add">Añadir</button></div></div>`}
+
+function prog(){let tot=0,best=0,run=0,wa=0,hy=0;
+Object.values(S.log).forEach(l=>{tot+=l.done.length;if(l.agua>=8)hy=1});
+for(let i=364;i>=0;i--){if(pct(dk(back(i)))>=70){run++;best=Math.max(best,run)}else run=0}
+for(let i=0;i<7;i++)wa+=pct(dk(back(i)));wa=Math.round(wa/7);
+const st=streak(),LV=[[0,'Semilla'],[30,'Constante'],[100,'Firme'],[250,'Imparable'],[600,'Divino']];let li=0;LV.forEach((x,i)=>{if(tot>=x[0])li=i});
+const nx=LV[li+1],lp=nx?Math.round((tot-LV[li][0])/(nx[0]-LV[li][0])*100):100;
+const St=(a,b)=>`<div class="c"><p class="k">${b}</p><p class="big">${a}</p></div>`;
+const LG=[['🔥','3 días seguidos',best>=3],['🌟','7 días seguidos',best>=7],['🏆','30 días seguidos',best>=30],['💧','8 vasos en un día',hy],['✅','100 check-ins',tot>=100]];
+return`<div class="top"><div><p class="mu">Tu camino</p><h1>Progreso</h1></div></div><div class="c"><p class="k">Nivel</p><div class="big">${LV[li][1]}</div><div class="bar"><i style="width:${lp}%"></i></div><small>${nx?`${tot} de ${nx[0]} check-ins para ${nx[1]}`:'Nivel máximo alcanzado'}</small></div><div class="g2">${St(st,'Racha')}${St(best,'Mejor racha')}${St(wa+'%','Promedio 7 días')}${St(tot,'Check-ins')}</div><div class="c"><p class="k">Últimos 35 días</p><div class="hm">${[...Array(35)].map((_,i)=>`<i style="opacity:${.1+pct(dk(back(34-i)))/100*.9}"></i>`).join('')}</div></div><div class="c"><p class="k">Logros</p>${LG.map(x=>`<span class="lg ${x[2]?'':'off'}">${x[0]} ${x[1]}</span>`).join('')}</div>`}
+
+function apr(){const cs=['Todos',...new Set(T.map(t=>t[0]))];
+return`<div class="top"><div><p class="mu">Conocimiento</p><h1>Aprender</h1></div></div><div class="sg">${cs.map(x=>`<button class="${x===ac?'on':''}" data-a="ac" data-i="${x}">${x}</button>`).join('')}</div><div class="c">${T.filter(t=>ac==='Todos'||t[0]===ac).map(t=>`<details><summary>${t[1]}</summary><p>${t[2]}</p></details>`).join('')}</div>`}
+
+function aj(){const AC=[['perla','#c9c9cf'],['salvia','#86ab85'],['arena','#cdb083'],['cielo','#79a8d8'],['lavanda','#a591d6']];
+const WN={verso:'Versículo',aros:'Aros de progreso',agua:'Agua',registro:'Sueño y ánimo',respira:'Respiración',consejo:'Consejo del día'};
+return`<div class="top"><div><p class="mu">Personaliza</p><h1>Ajustes</h1></div></div><div class="c"><p class="k">Tu nombre</p><input maxlength="20" value="${esc(S.name)}" data-f="name" placeholder="¿Cómo te llamas?"></div><div class="c"><p class="k">Apariencia</p><div class="sg">${[['auto','Auto'],['oscuro','Oscuro'],['claro','Claro']].map(x=>`<button class="${S.theme===x[0]?'on':''}" data-a="theme" data-i="${x[0]}">${x[1]}</button>`).join('')}</div><p class="k" style="margin-top:14px">Color de acento</p><div class="row">${AC.map(x=>`<button class="sw2 ${S.accent===x[0]?'on':''}" style="background:${x[1]}" data-a="acc" data-i="${x[0]}" aria-label="${x[0]}"></button>`).join('')}</div></div><div class="c"><p class="k">Widgets en Hoy</p>${Object.keys(WN).map(k=>row('▫️',WN[k],'',`<button class="sw ${S.w[k]?'on':''}" data-a="w" data-i="${k}" aria-label="${WN[k]}"></button>`)).join('')}</div><div class="c"><button class="bt" data-a="reset">${armed?'¿Seguro? Toca otra vez':'Borrar todos mis datos'}</button><small style="margin-top:8px">Tus datos se guardan solo en este dispositivo.</small></div><p class="foot">Divinity no reemplaza la atención médica. Ante síntomas persistentes (cansancio, baja libido, ánimo bajo) consulta a tu médico y pide un análisis antes de tomar suplementos.</p>`}
+
+function render(){const r=document.documentElement;
+const dark=S.theme==='auto'?matchMedia('(prefers-color-scheme:dark)').matches:S.theme==='oscuro';r.dataset.theme=dark?'oscuro':'claro';
+const A={perla:['var(--fg)','var(--bg)'],salvia:['#86ab85','#0b130b'],arena:['#cdb083','#17110a'],cielo:['#79a8d8','#07121c'],lavanda:['#a591d6','#100b1c']}[S.accent]||['var(--fg)','var(--bg)'];
+r.style.setProperty('--ac',A[0]);r.style.setProperty('--on',A[1]);
+$('#app').innerHTML=({hoy,hab,prog,apr,aj})[tab]()+(S.seen?'':`<div class="wl"><div class="c"><h1 style="font-size:40px">✝ Divinity</h1><p class="mu" style="margin:8px 0 18px">Fuerza, disciplina y fe. ¿Cómo te llamas?</p><input id="wn" maxlength="20" placeholder="Tu nombre"><br><br><button class="bt" style="width:100%" data-a="start">Comenzar</button></div></div>`);
+document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('on',b.dataset.i===tab));save()}
+matchMedia('(prefers-color-scheme:dark)').addEventListener('change',render);
+
+document.addEventListener('click',e=>{const t=e.target.closest('[data-a]');if(!t)return;const a=t.dataset.a,i=t.dataset.i,l=ent(dk(back(off)));
+if(a!=='reset')armed=false;try{navigator.vibrate&&navigator.vibrate(8)}catch(x){}
+if(a==='tab'){tab=i;scrollTo(0,0)}
+else if(a==='day')off=+i;
+else if(a==='hab'){const x=l.done.indexOf(i);x<0?l.done.push(i):l.done.splice(x,1)}
+else if(a==='ag')l.agua=Math.max(0,Math.min(16,l.agua+ +i));
+else if(a==='mood')l.animo=l.animo===+i?0:+i;
+else if(a==='vs')vi++;
+else if(a==='br')br=br?0:1;
+else if(a==='hc')hc=i;else if(a==='ac')ac=i;
+else if(a==='tog'){const x=S.on.indexOf(i);x<0?S.on.push(i):S.on.splice(x,1)}
+else if(a==='del')S.custom=S.custom.filter(h=>h.id!==i);
+else if(a==='add'){const v=$('#nh').value.trim();if(!v)return;S.custom.push({c:'Mío',id:'x'+Date.now(),t:v.slice(0,40),d:''})}
+else if(a==='theme')S.theme=i;else if(a==='acc')S.accent=i;
+else if(a==='w')S.w[i]=S.w[i]?0:1;
+else if(a==='start'){S.name=$('#wn').value.trim().slice(0,20);S.seen=1}
+else if(a==='reset'){if(!armed)armed=true;else{S=base();armed=false;off=0}}
+render()});
+document.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target.getAttribute('role')==='checkbox'){e.preventDefault();e.target.click()}else if(e.key==='Enter'&&e.target.id==='nh')$('[data-a=add]').click()});
+document.addEventListener('input',e=>{if(e.target.dataset.f==='lsueno')$('#sv').textContent=e.target.value+' h'});
+document.addEventListener('change',e=>{const f=e.target.dataset.f;if(!f)return;
+if(f==='name')S.name=e.target.value.trim().slice(0,20);else if(f==='lsueno')ent(dk(back(off))).sueno=+e.target.value;
+render()});
+render();
+if('serviceWorker' in navigator)addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));
+</script>
+</body>
+</html>
